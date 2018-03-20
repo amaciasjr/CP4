@@ -20,26 +20,26 @@ export default new Vuex.Store({
 	actions: {
 		getItems(context) {
 			// console.log("getting items");
-			axios.get("/api/items").then(response => {
+			axios.get(":3001/api/items").then(response => {
 				context.commit('setItems', response.data);
 				return true;
 			}).catch(err => {
 			});
 		},
 		addItem(context, item) {
-			axios.post("/api/items", item).then(response => {
+			axios.post(":3001/api/items", item).then(response => {
 				return context.dispatch('getItems');
 			}).catch(err => {
 			});
 		},
 		updateItem(context, item) {
-			axios.put("/api/items/" + item.id, item).then(response => {
+			axios.put(":3001/api/items/" + item.id, item).then(response => {
 				return true;
 			}).catch(err => {
 			});
 		},
 		deleteItem(context, item) {
-			axios.delete("/api/items/" + item.id).then(response => {
+			axios.delete(":3001/api/items/" + item.id).then(response => {
 				return context.dispatch('getItems');
 			}).catch(err => {
 			});
