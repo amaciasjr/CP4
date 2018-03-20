@@ -2,7 +2,6 @@
 	<nav>
 		<ul id="menu">
 			<li><router-link to="/">Home</router-link></li>
-			<li><router-link to="/graph">Graph</router-link></li>
 		</ul>
 	</nav>
 </template>
@@ -21,7 +20,7 @@
 	nav {
 		display: grid;
 		height: 50px;
-		width: 146px;
+		width: 50px;
 		margin-right: auto;
 		margin-left: auto;
 	}

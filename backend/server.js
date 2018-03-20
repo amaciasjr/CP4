@@ -11,39 +11,13 @@ app.use(express.static('dist'));
 let items = [];
 let id = 0;
 
-// setup some random data
-let doImport = true;
-let importItems = [];
-let importId = 0;
-
-function randomIntFromInterval(min,max) {
-	return Math.floor(Math.random()*(max-min+1)+min);
-}
-
-function createRandomData() {
-	const DAYS = 29;
-	for (let day = 1; day < DAYS; day++ ) {
-		let number = randomIntFromInterval(0,30);
-		for (let i = 0; i < number; i++ ) {
-			importId += 1;
-			let date = new Date(2018,1,day);
-			let item = {id:importId, text:"random thing", completed: true, completedDate: date };
-			importItems.push(item);
-		}
-	}
-}
-
-if (doImport) {
-	createRandomData();
-	items = importItems;
-	id = importId;
-}
-
 app.get('/api/items', (req, res) => {
+	console.log("Get !");
 	res.send(items);
 });
 
 app.put('/api/items/:id', (req, res) => {
+	console.log("Update!");
 	let id = parseInt(req.params.id);
 	let itemsMap = items.map(item => { return item.id; });
 	let index = itemsMap.indexOf(id);
@@ -63,6 +37,7 @@ app.put('/api/items/:id', (req, res) => {
 });
 
 app.post('/api/items', (req, res) => {
+	console.log("Add!");
 	id = id + 1;
 	let item = {id:id, text:req.body.text, completed: req.body.completed};
 	if (item.completed) {
@@ -73,6 +48,7 @@ app.post('/api/items', (req, res) => {
 });
 
 app.delete('/api/items/:id', (req, res) => {
+	console.log("Delete!");
 	let id = parseInt(req.params.id);
 	let removeIndex = items.map(item => { return item.id; }).indexOf(id);
 	if (removeIndex === -1) {

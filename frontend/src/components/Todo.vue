@@ -1,10 +1,10 @@
 <template>
 	<div class="todo">
-		<h1>Keep Track of Relatives Birthdays!</h1>
+		<h1>Keep Track of Birthday Gifts!</h1>
 		<main class="main-content-container">
 			<div class="image-container">
 				<img src="../assets/birthday.jpg"/>
-				<p>
+				<p id="photo-credit">
 					Photo by <a href="https://unsplash.com/photos/AbLybXyktlk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bambi Corro</a>
 					on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 				</p>
@@ -15,10 +15,10 @@
 					<button type="submit">Add a Birthday</button>
 				</form>
 				<div class="controls">
-					<button v-on:click="showAll()">See All B-Days</button>
-					<button v-on:click="showUpcoming()">Upcoming B-Days</button>
-					<button v-on:click="showPrevious()">Previous B-days</button>
-					<button v-on:click="removePrevious()">Remove Previous</button>
+					<button v-on:click="showAll()">See All Gifts</button>
+					<button v-on:click="showUpcoming()">Gifts To Buy</button>
+					<button v-on:click="showPrevious()">Gifts Already Bought</button>
+					<button v-on:click="removePrevious()">Remove Bought Gifts</button>
 				</div>
 				<ul>
 					<li v-for="item in filteredItems" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
@@ -27,9 +27,14 @@
 						<button v-on:click="deleteItem(item)" class="delete">X</button>
 					</li>
 				</ul>
+				<footer>
+					<a href="https://github.com/amaciasjr/CP4">Creative Project 4 Github Repo</a>
+				</footer>
 			</div>
 		</main>
+
 	</div>
+
 </template>
 
 <script>
@@ -75,6 +80,7 @@
 					text: this.text,
 					completed: false
 				});
+				this.text = "";
 			},
 			completeItem: function(item) {
 				this.$store.dispatch('updateItem',{
@@ -204,5 +210,18 @@
 	}
 	.controls {
 		margin-top: 20px;
+	}
+
+	.image-container p {
+		margin-top: 0;
+		text-align: center;
+	}
+
+	footer {
+		text-align: center;
+	}
+
+	a {
+		color: darkblue;
 	}
 </style>
